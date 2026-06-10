@@ -727,6 +727,51 @@ footer{background:var(--black);padding:4rem 5vw 2rem}
 @media(max-width:600px){
   .nav-logo-svg{height:30px}
 }
+
+/* ─── MODAL PRIVACIDADE ─── */
+.privacy-modal-overlay{
+  position:fixed;inset:0;z-index:9000;
+  background:rgba(0,0,0,.55);backdrop-filter:blur(4px);
+  display:flex;align-items:center;justify-content:center;
+  padding:1.5rem;
+  opacity:0;pointer-events:none;transition:opacity .3s;
+}
+.privacy-modal-overlay.show{opacity:1;pointer-events:auto}
+.privacy-modal{
+  background:var(--white);max-width:640px;width:100%;
+  max-height:85vh;overflow-y:auto;
+  padding:3rem 2.8rem 2.5rem;position:relative;
+  box-shadow:0 24px 80px rgba(0,0,0,.25);
+}
+.privacy-modal h3{
+  font-family:var(--serif);font-size:1.6rem;font-weight:400;
+  color:var(--g1);margin-bottom:1.5rem;letter-spacing:-.01em;
+}
+.privacy-modal p{
+  font-size:.86rem;line-height:1.85;color:var(--warm2);
+  font-weight:300;margin-bottom:1rem;
+}
+.privacy-modal p:last-of-type{margin-bottom:0}
+.privacy-modal strong{color:var(--g2);font-weight:500}
+.privacy-modal-close{
+  position:absolute;top:1.2rem;right:1.4rem;
+  background:none;border:none;cursor:pointer;
+  width:32px;height:32px;display:flex;align-items:center;justify-content:center;
+  color:var(--warm);transition:color .2s;
+}
+.privacy-modal-close:hover{color:var(--g1)}
+.privacy-modal-close svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2}
+.privacy-modal-footer{
+  margin-top:2rem;padding-top:1.5rem;
+  border-top:1px solid var(--cream2);
+  display:flex;justify-content:flex-end;
+}
+.privacy-modal-btn{
+  font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;font-weight:500;
+  padding:.8rem 2rem;background:var(--g2);color:var(--white);
+  border:none;cursor:pointer;transition:background .2s;
+}
+.privacy-modal-btn:hover{background:var(--g1)}
 </style>
 </head>
 <body>
@@ -1425,11 +1470,37 @@ document.querySelectorAll('a[href^="#"]:not([href="#"])').forEach(a=>{
   });
 });
 
-/* ── Política de privacidade simples (alert) ── */
-document.getElementById('privacy-link').addEventListener('click',e=>{
-  e.preventDefault();
-  alert('POLÍTICA DE PRIVACIDADE\n\nOs dados informados (nome, telefone, e-mail e descrição) são utilizados exclusivamente para retorno do contato e prestação de serviços jurídicos. Não compartilhamos com terceiros, salvo por exigência legal.\n\nO atendimento é coberto por sigilo profissional, conforme o Estatuto da OAB e a Lei Geral de Proteção de Dados (LGPD - Lei 13.709/2018). Você pode solicitar a exclusão dos seus dados a qualquer momento.');
-});
+/* ── Política de privacidade — modal ── */
+const privacyOverlay=document.getElementById('privacyModal');
+const privacyClose=document.getElementById('privacyClose');
+const privacyCloseBtn=document.getElementById('privacyCloseBtn');
+function openPrivacy(){privacyOverlay.classList.add('show');document.body.style.overflow='hidden';}
+function closePrivacy(){privacyOverlay.classList.remove('show');document.body.style.overflow='';}
+document.getElementById('privacy-link').addEventListener('click',e=>{e.preventDefault();openPrivacy();});
+privacyClose.addEventListener('click',closePrivacy);
+privacyCloseBtn.addEventListener('click',closePrivacy);
+privacyOverlay.addEventListener('click',e=>{if(e.target===privacyOverlay)closePrivacy();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closePrivacy();});
 </script>
+
+<!-- MODAL POLÍTICA DE PRIVACIDADE -->
+<div class="privacy-modal-overlay" id="privacyModal" role="dialog" aria-modal="true" aria-labelledby="privacyModalTitle">
+  <div class="privacy-modal">
+    <button class="privacy-modal-close" id="privacyClose" aria-label="Fechar">
+      <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <h3 id="privacyModalTitle">Política de Privacidade</h3>
+    <p><strong>Quais dados coletamos:</strong> Nome, número de telefone (WhatsApp), e-mail e a descrição da sua situação, informados voluntariamente no formulário de contato.</p>
+    <p><strong>Para que usamos:</strong> Exclusivamente para retorno do contato e prestação de serviços jurídicos. Não utilizamos os dados para fins de marketing, publicidade ou qualquer outra finalidade não informada.</p>
+    <p><strong>Compartilhamento:</strong> Seus dados não são compartilhados com terceiros, salvo por exigência legal ou determinação judicial.</p>
+    <p><strong>Sigilo profissional:</strong> Toda comunicação está coberta pelo sigilo profissional do advogado, conforme o Estatuto da Advocacia (Lei 8.906/94) e o Código de Ética da OAB.</p>
+    <p><strong>LGPD:</strong> Em conformidade com a Lei Geral de Proteção de Dados (Lei 13.709/2018), você pode, a qualquer momento, solicitar a exclusão, correção ou portabilidade dos seus dados pelo e-mail <strong>anabeatrizpivanti.adv@gmail.com</strong>.</p>
+    <p><strong>Prazo de retenção:</strong> Os dados são mantidos pelo tempo necessário à prestação do serviço ou pelo prazo legal aplicável, após o qual são excluídos com segurança.</p>
+    <div class="privacy-modal-footer">
+      <button class="privacy-modal-btn" id="privacyCloseBtn">Entendi</button>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
