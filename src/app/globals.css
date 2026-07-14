@@ -1,0 +1,215 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: light;
+
+  /* Page plane vs. card surface (kept near-neutral so charts validate cleanly) */
+  --canvas: #f7f2ee;
+  --surface: #fdfcfb;
+  --surface-raised: #ffffff;
+
+  /* Brand — muted rose/berry with a soft gold accent, used for UI chrome only.
+     Charts use the fixed categorical/status palettes below, never the brand hue. */
+  --brand-50: #fbeef0;
+  --brand-100: #f6dbe0;
+  --brand-300: #e2a2ae;
+  --brand-500: #b6465f;
+  --brand-600: #9c3a50;
+  --brand-700: #7d2e40;
+  --gold-400: #c7a565;
+  --gold-500: #b8935a;
+
+  /* Ink */
+  --ink-primary: #201a1c;
+  --ink-secondary: #5c5256;
+  --ink-muted: #8c8286;
+
+  /* Structure */
+  --border: rgba(32, 26, 28, 0.10);
+  --border-strong: rgba(32, 26, 28, 0.16);
+  --gridline: #e1e0d9;
+  --baseline: #c3c2b7;
+
+  /* Status — fixed, never themed, always paired with icon + label */
+  --good: #0ca30c;
+  --good-bg: #e6f6e6;
+  --warning: #b3790e;
+  --warning-bg: #fdf1d8;
+  --serious: #c15a34;
+  --serious-bg: #fbe8e0;
+  --critical: #d03b3b;
+  --critical-bg: #fbe4e4;
+  --info: #2a78d6;
+  --info-bg: #e6f0fc;
+
+  /* Categorical (charts) — fixed order, validated */
+  --cat-1: #2a78d6;
+  --cat-2: #1baf7a;
+  --cat-3: #eda100;
+  --cat-4: #008300;
+  --cat-5: #4a3aa7;
+  --cat-6: #e34948;
+  --cat-7: #e87ba4;
+  --cat-8: #eb6834;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --canvas: #171315;
+    --surface: #1f1a1c;
+    --surface-raised: #241f21;
+
+    --brand-50: #2b1a1e;
+    --brand-100: #3a2126;
+    --brand-300: #7d4655;
+    --brand-500: #d97690;
+    --brand-600: #e595aa;
+    --brand-700: #efb4c2;
+    --gold-400: #d4b276;
+    --gold-500: #e0c48c;
+
+    --ink-primary: #f7f2f3;
+    --ink-secondary: #c9bfc2;
+    --ink-muted: #948a8d;
+
+    --border: rgba(255, 255, 255, 0.10);
+    --border-strong: rgba(255, 255, 255, 0.16);
+    --gridline: #2c2c2a;
+    --baseline: #383835;
+
+    --good: #0ca30c;
+    --good-bg: #123312;
+    --warning: #d99a1f;
+    --warning-bg: #3a2c0c;
+    --serious: #e37e51;
+    --serious-bg: #3a2216;
+    --critical: #e66767;
+    --critical-bg: #3a1414;
+    --info: #3987e5;
+    --info-bg: #12233a;
+
+    --cat-1: #3987e5;
+    --cat-2: #199e70;
+    --cat-3: #c98500;
+    --cat-4: #2fa62f;
+    --cat-5: #9085e9;
+    --cat-6: #e66767;
+    --cat-7: #d55181;
+    --cat-8: #d95926;
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --canvas: #171315;
+  --surface: #1f1a1c;
+  --surface-raised: #241f21;
+
+  --brand-50: #2b1a1e;
+  --brand-100: #3a2126;
+  --brand-300: #7d4655;
+  --brand-500: #d97690;
+  --brand-600: #e595aa;
+  --brand-700: #efb4c2;
+  --gold-400: #d4b276;
+  --gold-500: #e0c48c;
+
+  --ink-primary: #f7f2f3;
+  --ink-secondary: #c9bfc2;
+  --ink-muted: #948a8d;
+
+  --border: rgba(255, 255, 255, 0.10);
+  --border-strong: rgba(255, 255, 255, 0.16);
+  --gridline: #2c2c2a;
+  --baseline: #383835;
+
+  --good: #0ca30c;
+  --good-bg: #123312;
+  --warning: #d99a1f;
+  --warning-bg: #3a2c0c;
+  --serious: #e37e51;
+  --serious-bg: #3a2216;
+  --critical: #e66767;
+  --critical-bg: #3a1414;
+  --info: #3987e5;
+  --info-bg: #12233a;
+
+  --cat-1: #3987e5;
+  --cat-2: #199e70;
+  --cat-3: #c98500;
+  --cat-4: #2fa62f;
+  --cat-5: #9085e9;
+  --cat-6: #e66767;
+  --cat-7: #d55181;
+  --cat-8: #d95926;
+}
+
+@theme inline {
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-surface-raised: var(--surface-raised);
+
+  --color-brand-50: var(--brand-50);
+  --color-brand-100: var(--brand-100);
+  --color-brand-300: var(--brand-300);
+  --color-brand-500: var(--brand-500);
+  --color-brand-600: var(--brand-600);
+  --color-brand-700: var(--brand-700);
+  --color-gold-400: var(--gold-400);
+  --color-gold-500: var(--gold-500);
+
+  --color-ink: var(--ink-primary);
+  --color-ink-secondary: var(--ink-secondary);
+  --color-ink-muted: var(--ink-muted);
+
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-gridline: var(--gridline);
+  --color-baseline: var(--baseline);
+
+  --color-good: var(--good);
+  --color-good-bg: var(--good-bg);
+  --color-warning: var(--warning);
+  --color-warning-bg: var(--warning-bg);
+  --color-serious: var(--serious);
+  --color-serious-bg: var(--serious-bg);
+  --color-critical: var(--critical);
+  --color-critical-bg: var(--critical-bg);
+  --color-info: var(--info);
+  --color-info-bg: var(--info-bg);
+
+  --color-cat-1: var(--cat-1);
+  --color-cat-2: var(--cat-2);
+  --color-cat-3: var(--cat-3);
+  --color-cat-4: var(--cat-4);
+  --color-cat-5: var(--cat-5);
+  --color-cat-6: var(--cat-6);
+  --color-cat-7: var(--cat-7);
+  --color-cat-8: var(--cat-8);
+
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-display);
+}
+
+body {
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+h1, h2, h3, .font-display {
+  font-family: var(--font-display), Georgia, serif;
+}
+
+::selection {
+  background: var(--brand-100);
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 999px;
+}
