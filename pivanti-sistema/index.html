@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pivanti Advocacia · Sistema de Gestão</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="logo">
+        <div class="logo-mark">P</div>
+        <div class="logo-text">
+          <div class="logo-name">PIVANTI</div>
+          <div class="logo-subtitle">advocacia</div>
+        </div>
+      </div>
+      <nav class="nav" id="nav">
+        <a class="nav-item" data-route="dashboard"><span class="nav-icon">⌂</span><span>Painel</span></a>
+        <a class="nav-item" data-route="clientes"><span class="nav-icon">◐</span><span>Clientes</span></a>
+        <a class="nav-item" data-route="processos"><span class="nav-icon">▣</span><span>Processos</span></a>
+        <a class="nav-item" data-route="documentos"><span class="nav-icon">▤</span><span>Documentos</span></a>
+        <a class="nav-item" data-route="tarefas"><span class="nav-icon">✓</span><span>Tarefas</span></a>
+        <a class="nav-item" data-route="prazos"><span class="nav-icon">◷</span><span>Prazos</span></a>
+        <a class="nav-item" data-route="calendario"><span class="nav-icon">▦</span><span>Calendário</span></a>
+        <a class="nav-item" data-route="financeiro"><span class="nav-icon">$</span><span>Financeiro</span></a>
+      </nav>
+      <div class="sidebar-footer">
+        <button class="btn-sidebar" id="btnExport">↓ Exportar dados</button>
+        <button class="btn-sidebar" id="btnImport">↑ Importar dados</button>
+        <input type="file" id="fileImport" accept=".json" style="display:none">
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <h1 class="page-title" id="pageTitle">Painel</h1>
+        <div class="topbar-actions">
+          <input type="text" class="search" id="globalSearch" placeholder="Buscar...">
+          <button class="btn btn-primary" id="btnNew">+ Novo</button>
+        </div>
+      </header>
+      <div class="content" id="content"></div>
+    </main>
+  </div>
+
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 id="modalTitle"></h2>
+        <button class="modal-close" id="modalClose">×</button>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
